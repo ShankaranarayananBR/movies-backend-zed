@@ -51,8 +51,11 @@ func (h *Handler) GetMovieByName(c echo.Context) error {
 func (h *Handler) UpdateMovieDetails(c echo.Context) error {
 	var movie_model models.Movies
 	update := new(requests.UpdateMovieRequest)
-	err := h.GetMovieByName(c)
-	err = (&echo.DefaultBinder{}).Bind(update, c)
+	err := (&echo.DefaultBinder{}).Bind(update, c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, "invalid update request")
+	}
+	err = h.GetMovieByName(c)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "invalid request")
 	}

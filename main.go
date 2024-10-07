@@ -36,7 +36,6 @@ func main() {
 	h := handler.Handler{
 		DB: db,
 	}
-
 	// checking health
 	e.GET("/", h.HealthCheck, middleware.CustomMiddleware)
 	e.POST("/newmovies", h.AddMovies, middleware.CustomMiddleware)
