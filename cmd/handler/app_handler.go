@@ -65,5 +65,5 @@ func (h *Handler) UpdateMovieDetails(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, "failed to update movie year")
 	}
 
-	return c.JSON(http.StatusOK, movie_model)
+	return c.JSON(http.StatusOK, "success")
 }
