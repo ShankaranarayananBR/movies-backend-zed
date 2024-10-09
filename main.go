@@ -29,9 +29,14 @@ func main() {
 		os.Getenv("DB_USERNAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 	if err != nil {
 		log.Printf("Error while connecting to DB:%v", err)
+		return
 	}
 	// AutoMigrate
-	db.AutoMigrate(&newmovie)
+	err = db.AutoMigrate(&newmovie)
+	if err != nil {
+		log.Printf("Error while migrating model to DB:%v", err)
+		return
+	}
 	// Declaration of Handler
 	h := handler.Handler{
 		DB: db,
